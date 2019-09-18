@@ -10,3 +10,16 @@ Strings may contain spaces. Spaces is not significant, only non-spaces symbols m
 It’s guaranteed that array contains more than 3 strings.
 
 '''
+
+def find_uniq(arr):
+    a = []
+    b = []
+    for i in arr:
+        a.append(''.join(sorted(i.lower())).strip())
+    for i in a:
+        b.append(''.join(set(list(i))).strip())
+    c = [i for i in b if b.count(i)==1]
+
+    for i in range(0,len(b)):
+        if b[i] == c[0]:
+            return arr[i]
