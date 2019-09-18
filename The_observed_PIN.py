@@ -25,26 +25,14 @@ Detective, we count on you!
 
 '''
 
+import itertools
+
 def get_pins(observed):
-numpad = [[0,8],[1,2,4],[1,2,3,5],[2,3,6],[1,4,5,7],[2,4,5,6,8],[3,5,6,9],[4,7,8],[0,5,7,8,9],[6,8,9]]
+    pin_pad = {'1':['1','2','4'],'2':['1','2','3','5'],'3':['2','3','6'],'4':['1','4','5','7'],'5':['2','4','5','6','8'],'6':['3','5','6','9'],'7':['4','7','8'],'8':['5','7','8','9','0'],'9':['6','8','9'],'0':['0','8']}
+    a = [pin_pad[n] for n in observed]
+    b = list(itertools.product(*a))
+    answer = [''.join(n) for n in b]
+    return answer
 
-    list_observed = [int(x) for x in str(observed)]
 
-    if len(list_observed) == 1:
-        return numpad[observed]
-
-    result = []
-    for i in range(0,len(list_observed)):
-        a=[]
-        for j in range(0,len(list_observed)):
-            if j != i:
-                a.append(list_observed[j])
-        for x in numpad[int(list_observed[i])]:
-            y=[]
-            y.append(x)
-            for k in a:
-                y.append(k)
-            result.append(''.join(str(v) for v in y))
-    return result
-  
-  
+print(get_pins(11))
